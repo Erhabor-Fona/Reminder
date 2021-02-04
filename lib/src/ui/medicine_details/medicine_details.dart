@@ -15,18 +15,18 @@ class MedicineDetails extends StatelessWidget {
     final GlobalBloc _globalBloc = Provider.of<GlobalBloc>(context);
     return Scaffold(
       resizeToAvoidBottomPadding: false,
-      backgroundColor: Colors.white,
+      backgroundColor: Color(0xff0A0E21),
       appBar: AppBar(
-        backgroundColor: Colors.white,
+        backgroundColor: Color(0xff0A0E21),
         iconTheme: IconThemeData(
           color: Color(0xFF3EB16F),
         ),
         centerTitle: true,
         title: Text(
-          "Mediminder Details",
+          "Reminder Details",
           style: TextStyle(
-            color: Colors.black,
-            fontSize: 18,
+            color: Colors.green,
+            fontSize: 25,
           ),
         ),
         elevation: 0.0,

@@ -20,11 +20,11 @@ class _HomePageState extends State<HomePage> {
     final GlobalBloc _globalBloc = Provider.of<GlobalBloc>(context);
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: Color(0xFF3EB16F),
+        backgroundColor: Colors.white,
         elevation: 0.0,
       ),
       body: Container(
-        color: Color(0xFFF6F8FC),
+        color: Color(0xff0A0E21),
         child: Column(
           children: <Widget>[
             Flexible(
@@ -46,7 +46,7 @@ class _HomePageState extends State<HomePage> {
       ),
       floatingActionButton: FloatingActionButton(
         elevation: 4,
-        backgroundColor: Color(0xFF3EB16F),
+        backgroundColor: Color(0x0ffffffff),
         child: Icon(
           Icons.add,
         ),
@@ -76,11 +76,11 @@ class TopContainer extends StatelessWidget {
         boxShadow: [
           BoxShadow(
             blurRadius: 5,
-            color: Colors.grey[400],
+            color: Color(0xff0A0E21),
             offset: Offset(0, 3.5),
           )
         ],
-        color: Color(0xFF3EB16F),
+        color: Color(0x0ffffffff),
       ),
       width: double.infinity,
       child: Column(
@@ -90,25 +90,25 @@ class TopContainer extends StatelessWidget {
               bottom: 10,
             ),
             child: Text(
-              "Mediminder",
+              "Remind me",
               style: TextStyle(
                 fontFamily: "Angel",
                 fontSize: 64,
-                color: Colors.white,
+                color: Colors.green,
               ),
             ),
           ),
           Divider(
-            color: Color(0xFFB0F3CB),
+            color: Colors.green,
           ),
           Padding(
             padding: EdgeInsets.only(top: 12.0),
             child: Center(
               child: Text(
-                "Number of Mediminders",
+                "Number of Reminders",
                 style: TextStyle(
                   fontSize: 17,
-                  color: Colors.white,
+                  color: Colors.green,
                 ),
               ),
             ),
@@ -117,7 +117,7 @@ class TopContainer extends StatelessWidget {
             stream: globalBloc.medicineList$,
             builder: (context, snapshot) {
               return Padding(
-                padding: EdgeInsets.only(top: 16.0, bottom: 5 ),
+                padding: EdgeInsets.only(top: 16.0, bottom: 5),
                 child: Center(
                   child: Text(
                     !snapshot.hasData ? '0' : snapshot.data.length.toString(),
@@ -149,21 +149,21 @@ class BottomContainer extends StatelessWidget {
           return Container();
         } else if (snapshot.data.length == 0) {
           return Container(
-            color: Color(0xFFF6F8FC),
+            color: Color(0xff0A0E21),
             child: Center(
               child: Text(
-                "Press + to add a Mediminder",
+                "Press + to add a reminder",
                 textAlign: TextAlign.center,
                 style: TextStyle(
                     fontSize: 24,
-                    color: Color(0xFFC9C9C9),
+                    color: Colors.green,
                     fontWeight: FontWeight.bold),
               ),
             ),
           );
         } else {
           return Container(
-            color: Color(0xFFF6F8FC),
+            color: Color(0xff0A0E21),
             child: GridView.builder(
               padding: EdgeInsets.only(top: 12),
               gridDelegate:
@@ -186,7 +186,7 @@ class MedicineCard extends StatelessWidget {
   MedicineCard(this.medicine);
 
   Hero makeIcon(double size) {
-    if (medicine.medicineType == "Bottle") {
+    if (medicine.medicineType == "Fire") {
       return Hero(
         tag: medicine.medicineName + medicine.medicineType,
         child: Icon(
@@ -195,7 +195,7 @@ class MedicineCard extends StatelessWidget {
           size: size,
         ),
       );
-    } else if (medicine.medicineType == "Pill") {
+    } else if (medicine.medicineType == "Water") {
       return Hero(
         tag: medicine.medicineName + medicine.medicineType,
         child: Icon(
@@ -204,7 +204,7 @@ class MedicineCard extends StatelessWidget {
           size: size,
         ),
       );
-    } else if (medicine.medicineType == "Syringe") {
+    } else if (medicine.medicineType == "Air") {
       return Hero(
         tag: medicine.medicineName + medicine.medicineType,
         child: Icon(
@@ -213,7 +213,7 @@ class MedicineCard extends StatelessWidget {
           size: size,
         ),
       );
-    } else if (medicine.medicineType == "Tablet") {
+    } else if (medicine.medicineType == "Earth") {
       return Hero(
         tag: medicine.medicineName + medicine.medicineType,
         child: Icon(
@@ -260,7 +260,7 @@ class MedicineCard extends StatelessWidget {
         },
         child: Container(
           decoration: BoxDecoration(
-            color: Colors.white,
+            color: Color(0xff0A0E21),
             borderRadius: BorderRadius.circular(15),
           ),
           child: Center(

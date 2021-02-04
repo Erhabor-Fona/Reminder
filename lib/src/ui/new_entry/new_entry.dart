@@ -1,5 +1,7 @@
 import 'dart:math';
+
 import 'package:flutter/material.dart';
+import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import 'package:medicine_reminder/src/common/convert_time.dart';
 import 'package:medicine_reminder/src/global_bloc.dart';
 import 'package:medicine_reminder/src/models/errors.dart';
@@ -9,7 +11,6 @@ import 'package:medicine_reminder/src/ui/homepage/homepage.dart';
 import 'package:medicine_reminder/src/ui/new_entry/new_entry_bloc.dart';
 import 'package:medicine_reminder/src/ui/success_screen/success_screen.dart';
 import 'package:provider/provider.dart';
-import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 
 class NewEntry extends StatefulWidget {
   @override
@@ -49,17 +50,17 @@ class _NewEntryState extends State<NewEntry> {
     return Scaffold(
       key: _scaffoldKey,
       resizeToAvoidBottomPadding: false,
-      backgroundColor: Colors.white,
+      backgroundColor: Color(0xff0A0E21),
       appBar: AppBar(
-        backgroundColor: Colors.white,
+        backgroundColor: Color(0xff0A0E21),
         iconTheme: IconThemeData(
           color: Color(0xFF3EB16F),
         ),
         centerTitle: true,
         title: Text(
-          "Add New Mediminder",
+          "Add New Reminder",
           style: TextStyle(
-            color: Colors.black,
+            color: Colors.green,
             fontSize: 18,
           ),
         ),
@@ -74,29 +75,31 @@ class _NewEntryState extends State<NewEntry> {
             ),
             children: <Widget>[
               PanelTitle(
-                title: "Medicine Name",
+                title: "Reminder Title",
                 isRequired: true,
               ),
               TextFormField(
                 maxLength: 12,
                 style: TextStyle(
-                  fontSize: 16,
+                  fontSize: 20,
+                  color: Colors.green,
                 ),
                 controller: nameController,
                 textCapitalization: TextCapitalization.words,
                 decoration: InputDecoration(
-                  border: UnderlineInputBorder(),
+                  border: InputBorder.none,
                 ),
               ),
               PanelTitle(
-                title: "Dosage in mg",
+                title: "Description of Reminder",
                 isRequired: false,
               ),
               TextFormField(
                 controller: dosageController,
-                keyboardType: TextInputType.number,
+                keyboardType: TextInputType.text,
                 style: TextStyle(
                   fontSize: 16,
+                  color: Colors.green,
                 ),
                 textCapitalization: TextCapitalization.words,
                 decoration: InputDecoration(
@@ -108,7 +111,7 @@ class _NewEntryState extends State<NewEntry> {
               ),
 
               PanelTitle(
-                title: "Medicine Type",
+                title: "Safety Type",
                 isRequired: false,
               ),
               Padding(
@@ -121,28 +124,28 @@ class _NewEntryState extends State<NewEntry> {
                       children: <Widget>[
                         MedicineTypeColumn(
                             type: MedicineType.Bottle,
-                            name: "Bottle",
+                            name: "Fire",
                             iconValue: 0xe900,
                             isSelected: snapshot.data == MedicineType.Bottle
                                 ? true
                                 : false),
                         MedicineTypeColumn(
                             type: MedicineType.Pill,
-                            name: "Pill",
+                            name: "Water",
                             iconValue: 0xe901,
                             isSelected: snapshot.data == MedicineType.Pill
                                 ? true
                                 : false),
                         MedicineTypeColumn(
                             type: MedicineType.Syringe,
-                            name: "Syringe",
+                            name: "Air",
                             iconValue: 0xe902,
                             isSelected: snapshot.data == MedicineType.Syringe
                                 ? true
                                 : false),
                         MedicineTypeColumn(
                             type: MedicineType.Tablet,
-                            name: "Tablet",
+                            name: "Earth",
                             iconValue: 0xe903,
                             isSelected: snapshot.data == MedicineType.Tablet
                                 ? true
