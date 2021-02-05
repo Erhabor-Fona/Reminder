@@ -87,7 +87,7 @@ class _NewEntryState extends State<NewEntry> {
                 controller: nameController,
                 textCapitalization: TextCapitalization.words,
                 decoration: InputDecoration(
-                  border: InputBorder.none,
+                  border: UnderlineInputBorder(),
                 ),
               ),
               PanelTitle(
@@ -123,31 +123,31 @@ class _NewEntryState extends State<NewEntry> {
                       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                       children: <Widget>[
                         MedicineTypeColumn(
-                            type: MedicineType.Bottle,
+                            type: MedicineType.Fire,
                             name: "Fire",
                             iconValue: 0xe900,
-                            isSelected: snapshot.data == MedicineType.Bottle
+                            isSelected: snapshot.data == MedicineType.Fire
                                 ? true
                                 : false),
                         MedicineTypeColumn(
-                            type: MedicineType.Pill,
+                            type: MedicineType.Water,
                             name: "Water",
                             iconValue: 0xe901,
-                            isSelected: snapshot.data == MedicineType.Pill
+                            isSelected: snapshot.data == MedicineType.Water
                                 ? true
                                 : false),
                         MedicineTypeColumn(
-                            type: MedicineType.Syringe,
+                            type: MedicineType.Air,
                             name: "Air",
                             iconValue: 0xe902,
-                            isSelected: snapshot.data == MedicineType.Syringe
+                            isSelected: snapshot.data == MedicineType.Air
                                 ? true
                                 : false),
                         MedicineTypeColumn(
-                            type: MedicineType.Tablet,
+                            type: MedicineType.Earth,
                             name: "Earth",
                             iconValue: 0xe903,
-                            isSelected: snapshot.data == MedicineType.Tablet
+                            isSelected: snapshot.data == MedicineType.Earth
                                 ? true
                                 : false),
                       ],
@@ -192,7 +192,7 @@ class _NewEntryState extends State<NewEntry> {
                     ),
                     onPressed: () {
                       String medicineName;
-                      int dosage;
+                      String dosage;
                       //--------------------Error Checking------------------------
                       //Had to do error checking in UI
                       //Due to unoptimized BLoC value-grabbing architecture
@@ -204,10 +204,10 @@ class _NewEntryState extends State<NewEntry> {
                         medicineName = nameController.text;
                       }
                       if (dosageController.text == "") {
-                        dosage = 0;
+                        dosage = " ";
                       }
                       if (dosageController.text != "") {
-                        dosage = int.parse(dosageController.text);
+                        dosage = dosageController.text;
                       }
                       for (var medicine in _globalBloc.medicineList$.value) {
                         if (medicineName == medicine.medicineName) {
@@ -273,13 +273,13 @@ class _NewEntryState extends State<NewEntry> {
       (EntryError error) {
         switch (error) {
           case EntryError.NameNull:
-            displayError("Please enter the medicine's name");
+            displayError("Please enter the reminder name");
             break;
           case EntryError.NameDuplicate:
-            displayError("Medicine name already exists");
+            displayError("Reminder name already exists");
             break;
           case EntryError.Dosage:
-            displayError("Please enter the dosage required");
+            displayError("Please enter the description required");
             break;
           case EntryError.Interval:
             displayError("Please select the reminder's interval");
@@ -298,7 +298,7 @@ class _NewEntryState extends State<NewEntry> {
       SnackBar(
         backgroundColor: Colors.red,
         content: Text(error),
-        duration: Duration(milliseconds: 2000),
+        duration: Duration(milliseconds: 3000),
       ),
     );
   }
@@ -360,10 +360,10 @@ class _NewEntryState extends State<NewEntry> {
       }
       await flutterLocalNotificationsPlugin.showDailyAtTime(
           int.parse(medicine.notificationIDs[i]),
-          'Mediminder: ${medicine.medicineName}',
+          'Reminder: ${medicine.medicineName}',
           medicine.medicineType.toString() != MedicineType.None.toString()
-              ? 'It is time to take your ${medicine.medicineType.toLowerCase()}, according to schedule'
-              : 'It is time to take your medicine, according to schedule',
+              ? 'It is time to check ${medicine.medicineType.toLowerCase()}, safety according to schedule'
+              : 'It is time to check for safety, according to schedule',
           Time(hour, minute, 0),
           platformChannelSpecifics);
       hour = ogValue;
@@ -398,7 +398,7 @@ class _IntervalSelectionState extends State<IntervalSelection> {
             Text(
               "Remind me every  ",
               style: TextStyle(
-                color: Colors.black,
+                color: Colors.green,
                 fontSize: 18,
                 fontWeight: FontWeight.w500,
               ),
@@ -409,8 +409,8 @@ class _IntervalSelectionState extends State<IntervalSelection> {
                   ? Text(
                       "Select an Interval",
                       style: TextStyle(
-                          fontSize: 10,
-                          color: Colors.black,
+                          fontSize: 14,
+                          color: Colors.green,
                           fontWeight: FontWeight.w400),
                     )
                   : null,
@@ -422,8 +422,8 @@ class _IntervalSelectionState extends State<IntervalSelection> {
                   child: Text(
                     value.toString(),
                     style: TextStyle(
-                      color: Colors.black,
-                      fontSize: 18,
+                      color: Colors.green,
+                      fontSize: 22,
                       fontWeight: FontWeight.w500,
                     ),
                   ),
@@ -439,8 +439,8 @@ class _IntervalSelectionState extends State<IntervalSelection> {
             Text(
               _selected == 1 ? " hour" : " hours",
               style: TextStyle(
-                color: Colors.black,
-                fontSize: 18,
+                color: Colors.green,
+                fontSize: 22,
                 fontWeight: FontWeight.w500,
               ),
             ),
@@ -534,7 +534,7 @@ class MedicineTypeColumn extends StatelessWidget {
             width: 85,
             decoration: BoxDecoration(
               borderRadius: BorderRadius.circular(10),
-              color: isSelected ? Color(0xFF3EB16F) : Colors.white,
+              color: isSelected ? Color(0xFF3EB16F) : Color(0xff0A0E21),
             ),
             child: Center(
               child: Padding(
@@ -592,7 +592,7 @@ class PanelTitle extends StatelessWidget {
           TextSpan(
             text: title,
             style: TextStyle(
-                fontSize: 14, color: Colors.black, fontWeight: FontWeight.w500),
+                fontSize: 14, color: Colors.green, fontWeight: FontWeight.w500),
           ),
           TextSpan(
             text: isRequired ? " *" : "",

@@ -1,8 +1,7 @@
 import 'dart:async';
 
-import 'package:flutter/material.dart';
 import 'package:flare_flutter/flare_actor.dart';
-import 'package:medicine_reminder/src/ui/homepage/homepage.dart';
+import 'package:flutter/material.dart';
 
 class SuccessScreen extends StatefulWidget {
   @override
@@ -27,7 +26,7 @@ class _SuccessScreenState extends State<SuccessScreen> {
   @override
   Widget build(BuildContext context) {
     return Material(
-      color: Colors.white,
+      color: Color(0xff0A0E21),
       child: Center(
         child: Container(
           child: Center(

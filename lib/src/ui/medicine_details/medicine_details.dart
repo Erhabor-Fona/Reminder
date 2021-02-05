@@ -59,7 +59,7 @@ class MedicineDetails extends StatelessWidget {
                     },
                     child: Center(
                       child: Text(
-                        "Delete Mediminder",
+                        "Delete Reminder",
                         style: TextStyle(
                           color: Colors.white,
                           fontSize: 22,
@@ -99,7 +99,7 @@ class MedicineDetails extends StatelessWidget {
                     padding: EdgeInsets.all(18),
                     child: Center(
                       child: Text(
-                        "Delete this Mediminder?",
+                        "Delete this Reminder?",
                         textAlign: TextAlign.center,
                         style: TextStyle(
                             fontSize: 16, fontWeight: FontWeight.bold),
@@ -183,7 +183,7 @@ class MainSection extends StatelessWidget {
   }) : super(key: key);
 
   Hero makeIcon(double size) {
-    if (medicine.medicineType == "Bottle") {
+    if (medicine.medicineType == "Fire") {
       return Hero(
         tag: medicine.medicineName + medicine.medicineType,
         child: Icon(
@@ -192,7 +192,7 @@ class MainSection extends StatelessWidget {
           size: size,
         ),
       );
-    } else if (medicine.medicineType == "Pill") {
+    } else if (medicine.medicineType == "Water") {
       return Hero(
         tag: medicine.medicineName + medicine.medicineType,
         child: Icon(
@@ -201,7 +201,7 @@ class MainSection extends StatelessWidget {
           size: size,
         ),
       );
-    } else if (medicine.medicineType == "Syringe") {
+    } else if (medicine.medicineType == "Air") {
       return Hero(
         tag: medicine.medicineName + medicine.medicineType,
         child: Icon(
@@ -210,7 +210,7 @@ class MainSection extends StatelessWidget {
           size: size,
         ),
       );
-    } else if (medicine.medicineType == "Tablet") {
+    } else if (medicine.medicineType == "Earth") {
       return Hero(
         tag: medicine.medicineName + medicine.medicineType,
         child: Icon(
@@ -246,13 +246,13 @@ class MainSection extends StatelessWidget {
                 child: Material(
                   color: Colors.transparent,
                   child: MainInfoTab(
-                    fieldTitle: "Medicine Name",
+                    fieldTitle: "Reminder Name",
                     fieldInfo: medicine.medicineName,
                   ),
                 ),
               ),
               MainInfoTab(
-                fieldTitle: "Dosage",
+                fieldTitle: "Description",
                 fieldInfo: medicine.dosage == 0
                     ? "Not Specified"
                     : medicine.dosage.toString() + " mg",
@@ -313,7 +313,7 @@ class ExtendedSection extends StatelessWidget {
         shrinkWrap: true,
         children: <Widget>[
           ExtendedInfoTab(
-            fieldTitle: "Medicine Type",
+            fieldTitle: "Safety Type",
             fieldInfo: medicine.medicineType == "None"
                 ? "Not Specified"
                 : medicine.medicineType,
@@ -359,7 +359,7 @@ class ExtendedInfoTab extends StatelessWidget {
                 fieldTitle,
                 style: TextStyle(
                   fontSize: 20,
-                  color: Colors.black,
+                  color: Colors.green,
                   fontWeight: FontWeight.bold,
                 ),
               ),
